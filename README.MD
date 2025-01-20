@@ -1,27 +1,38 @@
 # HEDGE OPENFOAM V1
 Initial simulation of HEDGE and learning about openFOAM. Case based off of `compressibleInflowOutflow` template (from `openfoam main directory/etc/templates`)
 
-**vscode** makes editing OpenFOAM cases a lot easier
- - use extensions `OpenFOAM` by Zhikui Guo to get OpenFOAM text highlighting and `WSL` to access the `bash` terminal in code. 
 
-add the following:
-```js
-"files.associations": {
-    "*Dict": "OpenFOAM",
-    "*Properties": "OpenFOAM",
-    "fvSchemes": "OpenFOAM",
-    "fvSolution": "OpenFOAM",
-    "**/constant/g": "OpenFOAM",
-    "**/0/*": "OpenFOAM"
-    }
-```
-to code's `settings.json` to have openfoam cases show up with proper highlighting
+## TO DO:
+**Minimum viable product:**
+- [x] create geometry (i used onshape), ask for share
+- [x] set up blockmesh
+- [ ] get snappyHexMesh working for small scale coarse mesh test
+- [ ] get snappy to run in parallel
+- [ ] run snappyHexMesh on HPC
+- [ ] run rhoCentralFoam on HPC
+- [ ] swap rhoCentralFoam out for [hy2foam](https://hystrath.github.io/solvers/fleming/hy2foam/) to increase accuracy
+- [ ] heat conduction FEA of HEDGE to make sure it doesn't break before data transmitted 
+
+**"Fun" things to do if we have enough time:** 
+- [ ] FSI study of fin hinge behavior
+- [ ] Simulate the entire model instead of \frac{1}{4} of it
+
+
+
+
+## Case Structure:
+### `0`:
+folder containing all initial conditions
+### `constant`: 
+folder containing geometry (raw and meshed), BCs, fluid properties, turbulence properties
+### `system`:
+folder containing dictionaries for how the case is meshed and run
 ## Geometry Preparation
 HEDGE modeled in Onshape, fluid domain created using sketch, extrusion, and cut in onshape, refinement box created using sketch and extrusion in Onshape. Fluid domain, refinement box exported as fine STL.
 
-Blender used for decomposing fluid domain into patches (faces) using coplanar selection mode, geometry tested watertight using ___, exported as multiple ASCII STL files
+Blender used for decomposing fluid domain into patches (faces) using coplanar selection mode, geometry tested watertight by using non-manifold and loose geometry selection modes (in select all by trait), and exported as multiple ASCII STL files. 
 
- n STLs can be combined using `cat stl1.stl stl2.stl ... stln.stl > combined.stl` in bash terminal. produces 1 stl with distinct patches by boundary condition. Could potentially be exported from blender that way
+ n STLs can be combined using `cat stl1.stl stl2.stl ... stln.stl > combined.stl` in bash terminal. produces 1 stl with distinct patches by boundary condition. Could potentially be exported from blender that way. 
 
 edge meshing done in paraview with edge filter to identify right angle.  `surfaceFeatureExtract` function in openFOAM used to write eMesh file used for edge refinement using the identified angle.
 
@@ -50,6 +61,24 @@ File which defines method for parallel processing (running simulation on multipl
 
 
 ## OTHER FILES
-1. `Allclean.sh` clears everything from case except necessary starting items
-1.  `Allrun.sh` runs all meshing, refinement, and solving of the case. Maybe needed for running on HPC? Will probably be augmented with a script that just meshes in the parallel configuration for HPC or maybe a set of bash options if I can figure out how
-1. `hedge.foam` is clickable and launches paraView. It doesn't block terminal input so is better than paraFoam which doesn't work great with HPC anyways
+1. `Allclean.sh` clears everything from case except necessary starting items. not written yet but easily available from tutorials.
+1.  `Allrun.sh` runs all meshing, refinement, and solving of the case. Maybe needed for running on HPC? Will probably be augmented with a script that just meshes in the parallel configuration for HPC or maybe a set of bash options if I can figure out how. not written yet but easily available from tutorials.
+1. `hedge.foam` is clickable and launches paraView. It doesn't block terminal input so is better than paraFoam which doesn't work with HPC slurm
+1. `template_readme_secondary.md` is the readme for the template i used which might have some useful info.
+
+[!TIP]
+**vscode** makes editing OpenFOAM cases a lot easier
+ - use extensions `OpenFOAM` by Zhikui Guo to get OpenFOAM text highlighting and `WSL` to access the `bash` terminal in code. 
+
+add the following:
+```js
+"files.associations": {
+    "*Dict": "OpenFOAM",
+    "*Properties": "OpenFOAM",
+    "fvSchemes": "OpenFOAM",
+    "fvSolution": "OpenFOAM",
+    "**/constant/g": "OpenFOAM",
+    "**/0/*": "OpenFOAM"
+    }
+```
+to code's `settings.json` to have openfoam cases show up with proper highlighting

@@ -1,5 +1,7 @@
 # HEDGE OPENFOAM V1
 Initial simulation of HEDGE and learning about openFOAM. Case based off of `compressibleInflowOutflow` template (from `openfoam main directory/etc/templates`)
+>[!TIP]
+>**vscode** makes editing OpenFOAM cases a lot easier
 
 
 ## TO DO:
@@ -66,9 +68,7 @@ File which defines method for parallel processing (running simulation on multipl
 1. `hedge.foam` is clickable and launches paraView. It doesn't block terminal input so is better than paraFoam which doesn't work with HPC slurm
 1. `template_readme_secondary.md` is the readme for the template i used which might have some useful info.
 
->[!TIP]
->**vscode** makes editing OpenFOAM cases a lot easier
-
+## VSCODE Setup
  - use extensions `OpenFOAM` by Zhikui Guo to get OpenFOAM text highlighting and `WSL` to access the `bash` terminal in code. 
 
 add the following:

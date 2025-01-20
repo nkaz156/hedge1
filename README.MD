@@ -1,7 +1,7 @@
 # HEDGE OPENFOAM V1
 Initial simulation of HEDGE and learning about openFOAM. Case based off of `compressibleInflowOutflow` template (from `openfoam main directory/etc/templates`)
 >[!TIP]
->**vscode** makes editing OpenFOAM cases a lot easier
+>**vscode** makes editing OpenFOAM cases a lot easier. More info at end of document.
 
 
 ## TO DO:

@@ -1,0 +1,86 @@
+solid Mesh
+  facet normal 0 0 -1
+    outer loop
+      vertex -0.183134 0.19774 0
+      vertex 1.0988 0.19774 0
+      vertex -0.183134 0 0
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex 1.0988 0.19774 0
+      vertex 1.0988 -2.86703e-18 0
+      vertex -0.183134 0 0
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 1.0988 0.19774 0.19774
+      vertex -0.183134 0.19774 0.19774
+      vertex 1.0988 -2.86703e-18 0.19774
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex -0.183134 0.19774 0.19774
+      vertex -0.183134 0 0.19774
+      vertex 1.0988 -2.86703e-18 0.19774
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -0.183134 0 0.19774
+      vertex -0.183134 0.19774 0.19774
+      vertex -0.183134 0 0
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -0.183134 0.19774 0.19774
+      vertex -0.183134 0.19774 0
+      vertex -0.183134 0 0
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex -0.183134 0.19774 0.19774
+      vertex 1.0988 0.19774 0.19774
+      vertex -0.183134 0.19774 0
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 1.0988 0.19774 0.19774
+      vertex 1.0988 0.19774 0
+      vertex -0.183134 0.19774 0
+    endloop
+  endfacet
+  facet normal -2.23648e-18 -1 0
+    outer loop
+      vertex 1.0988 -2.86703e-18 0.19774
+      vertex -0.183134 0 0.19774
+      vertex 1.0988 -2.86703e-18 0
+    endloop
+  endfacet
+  facet normal -2.23648e-18 -1 0
+    outer loop
+      vertex -0.183134 0 0.19774
+      vertex -0.183134 0 0
+      vertex 1.0988 -2.86703e-18 0
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 1.0988 0.19774 0.19774
+      vertex 1.0988 -2.86703e-18 0.19774
+      vertex 1.0988 0.19774 0
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 1.0988 -2.86703e-18 0.19774
+      vertex 1.0988 -2.86703e-18 0
+      vertex 1.0988 0.19774 0
+    endloop
+  endfacet
+endsolid Mesh

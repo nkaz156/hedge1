@@ -1,0 +1,132 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2406                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+backgroundMesh
+{
+    backgroundMeshSize 0.0254; // max background mesh cell size (in meters)
+    xMin    -0.5;
+    xMax     3.7;
+    yMin    -0.05;
+    yMax     1;
+    zMin    -0.05;
+    zMax     1;
+    
+    // uncomment to manually define number of cells    
+/*     xCells  20;
+    yCells  20;
+    zCells  20; */
+
+    // commment to manually define number of cells. 
+    xCells  #eval "ceil(mag($xMax - $xMin) / $backgroundMeshSize)"; // #eval used to calculate # of cells
+    yCells  #eval "ceil(mag($yMax - $yMin) / $backgroundMeshSize)"; // ceil - rounds to next highest integer # of cells
+    zCells  #eval "ceil(mag($zMax - $zMin) / $backgroundMeshSize)"; // mag - magnitude. equivalent to absolute value.
+}
+
+scale   1;
+
+vertices
+(
+    ($:backgroundMesh.xMin $:backgroundMesh.yMin $:backgroundMesh.zMin)
+    ($:backgroundMesh.xMax $:backgroundMesh.yMin $:backgroundMesh.zMin)
+    ($:backgroundMesh.xMax $:backgroundMesh.yMax $:backgroundMesh.zMin)
+    ($:backgroundMesh.xMin $:backgroundMesh.yMax $:backgroundMesh.zMin)
+
+    ($:backgroundMesh.xMin $:backgroundMesh.yMin $:backgroundMesh.zMax)
+    ($:backgroundMesh.xMax $:backgroundMesh.yMin $:backgroundMesh.zMax)
+    ($:backgroundMesh.xMax $:backgroundMesh.yMax $:backgroundMesh.zMax)
+    ($:backgroundMesh.xMin $:backgroundMesh.yMax $:backgroundMesh.zMax)
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7)
+    (
+        $:backgroundMesh.xCells
+        $:backgroundMesh.yCells
+        $:backgroundMesh.zCells
+    )
+    simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+//  Uncomment below to define patches in background mesh
+/*
+    left
+    {
+        type patch;
+        faces
+        (
+            (0 3 7 4)
+        );
+    }
+
+    right
+    {
+        type patch;
+        faces
+        (
+            (1 5 6 2)
+        );
+    }
+
+    bottom
+    {
+        type patch;
+        faces
+        (
+            (0 1 2 3)
+        );
+    }
+
+    top
+    {
+        type patch;
+        faces
+        (
+            (4 7 6 5)
+        );
+    }
+
+    back
+    {
+        type patch;
+        faces
+        (
+            (0 4 5 1)
+        );
+    }
+
+    front
+    {
+        type patch;
+        faces
+        (
+            (3 2 6 7)
+        );
+    }
+*/
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

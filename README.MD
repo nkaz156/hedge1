@@ -57,6 +57,8 @@ File which defines method for parallel processing (running simulation on multipl
 + `decomposePar` - Command used to decompose case into chunks for each processor core to handle. number of subdomains should be number of **physical** cores available.
 + `reconstructPar` - Command used to reconstruct the case into singular entity
 - ` mpirun –np <NPROCS> <application/utility> –parallel` - command used to run whatever application in parallel - e.g. `snappyHexMesh`, `rhoCentralFoam`, etc.
+- `mpirun -np <NPROCS> redistributePar -decompose -parallel` does the decomposition in parallel
+- `mpirun -np <NPROCS> redistributePar -reconstruct -parallel` reconstructs the mesh in parallel
 - `reconstructParMesh` used if remeshing or using AMR. 
 - `paraFoam –builtin` used to postprocess without reconstructing but need to select decomposed case in paraview. 
 

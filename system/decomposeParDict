@@ -18,9 +18,9 @@ numberOfSubdomains  8;
 
 method  scotch;
 
-coeffs
+scotchCoeffs
 {
-    n   (8 1 1); // # of subdomains in x, y, z directions
+    //n   (8 1 1); // # of subdomains in x, y, z directions
 }
 
 // ************************************************************************* //

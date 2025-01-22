@@ -19,9 +19,9 @@ backgroundMesh
     backgroundMeshSize 0.05; // max background mesh cell size (in meters)
     xMin    -0.366268;
     xMax     3.66268;
-    yMin    0;
+    yMin    -6.75955e-17;
     yMax     0.988702;
-    zMin    0;
+    zMin    -3.20924e-17;
     zMax     0.988702;
     
     // uncomment to manually define number of cells    

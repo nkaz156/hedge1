@@ -17,7 +17,7 @@ Initial simulation of HEDGE and learning about openFOAM. Case based off of `comp
 
 **"Fun" things to do if we have enough time:** 
 - [ ] FSI study of fin hinge behavior
-- [ ] Simulate the entire model instead of \frac{1}{4} of it
+- [ ] Simulate the entire model instead of 1/4 of it
 
 
 

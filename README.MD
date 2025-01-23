@@ -13,7 +13,12 @@ Initial simulation of HEDGE and learning about openFOAM. Case based off of `comp
 - [x] create geometry (i used onshape), ask for share
 - [x] set up blockmesh
 - [ ] get snappyHexMesh working for small scale coarse mesh test
-- [ ] get snappy to run in parallel
+  - [ ] fix errors with edge refinement - missing where it intersects with XY wall symmetry plane
+  - [ ] dial in curve refinement
+  - [ ] fix missing refinement region
+  - [ ] fix 1 or 2 cells in odd places - especially by fins. might be coarse mesh artifacts
+  - [ ] add boundary layer
+- [x] get snappy to run in parallel
 - [ ] run snappyHexMesh on HPC
 - [ ] run rhoCentralFoam on HPC
 - [ ] swap rhoCentralFoam out for [hy2foam](https://hystrath.github.io/solvers/fleming/hy2foam/) to increase accuracy

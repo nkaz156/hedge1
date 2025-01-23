@@ -1,5 +1,7 @@
 constant/polyMesh
 
-[:digit:]
+[:digit:]/
 
-!0
+!0/
+
+processor*/

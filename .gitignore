@@ -1,7 +1,7 @@
 constant/polyMesh
-
-[:digit:]/
-
 !0/
+?/
+processor*/ 
+*.DS_Store
 
-processor*/
+# Add any other system specific files below

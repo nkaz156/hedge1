@@ -15,7 +15,7 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 castellatedMesh true;
-snap            true;
+snap            false;
 addLayers       false;
 
 // Geometry. Definition of all surfaces. All surfaces are of class
@@ -81,10 +81,10 @@ castellatedMeshControls
     // This is a featureEdgeMesh, read from constant/triSurface for now.
     features
     (
-        {
+/*         {
             file "hedge_edges.vtk";
             level 6;
-        }
+        } */
     );
 
 
@@ -103,7 +103,7 @@ castellatedMeshControls
         hedge
         {
             // Surface-wise min and max refinement level
-            level (5 5); //(8 8) for fine, (5 5) for coarse testing on laptop
+            level (2 4); //(8 8) for fine, (5 5) for coarse testing on laptop
 
             // Optional specification of patch type (default is wall). No
             // constraint types (cyclic, symmetry) etc. are allowed.
@@ -113,10 +113,50 @@ castellatedMeshControls
                 //inGroups (motorBikeGroup);
             }
         }
+        symmetry1
+        {
+            level (0 0);
+            patchInfo
+            {
+                type patch;
+            }
+        }
+        symmetry2
+        {
+            level (0 0);
+            patchInfo
+            {
+                type patch;
+            }
+        }
+        slipwall1
+        {
+            level (0 0);
+            patchInfo
+            {
+                type patch;
+            }
+        }
+        inlet1
+        {
+            level (0 0);
+            patchInfo
+            {
+                type patch;
+            }
+        }
+        outlet1
+        {
+            level (0 0);
+            patchInfo
+            {
+                type patch;
+            }
+        }
     }
 
     // Resolve sharp angles
-    resolveFeatureAngle 30;
+    resolveFeatureAngle 5;
 
 
     // Region-wise refinement
@@ -134,11 +174,11 @@ castellatedMeshControls
 
     refinementRegions
     {
-        "refinebox.stl"
+/*         refinebox
         {
             mode inside;
-            levels ((1.0 3)); // first value ignored since we're not using distance selection
-        }
+            levels ((1.0 2)); // first value ignored since we're not using distance selection but still needed
+        } */
     }
 
 
@@ -308,7 +348,8 @@ meshQualityControls
 // Advanced
 
 // Format to use for lines (e.g. leak path)
-setFormat ensight;
+
+// setFormat ensight;
 
 
 // Write flags

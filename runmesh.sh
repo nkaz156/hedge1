@@ -15,3 +15,14 @@ for dir in */; do
         rm -r "$dir"
     fi
 done
+
+echo "blockMesh - press Enter to continue"
+read # wait for user input
+blockMesh
+
+read -p "snappyHexMesh - enter number of processors: " numProc
+decomposePar
+mpirun -np $numProc snappyHexMesh -parallel
+reconstructParMesh
+
+echo "Done!"

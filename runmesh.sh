@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")"
 clear
-
+echo "Press Enter to clean the old mesh"
+read
 echo "Deleting old files"
 rm -r processor*
 rm -r constant/polyMesh

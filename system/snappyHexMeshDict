@@ -15,7 +15,7 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 castellatedMesh true;
-snap            true;
+snap            false;
 addLayers       false;
 
 // Geometry. Definition of all surfaces. All surfaces are of class
@@ -68,13 +68,13 @@ castellatedMeshControls
     // (since balancing is quite expensive)
     // Expressed as fraction of perfect balance (= overall number of cells /
     // nProcs). 0=balance always.
-    maxLoadUnbalance 0.10;
+    maxLoadUnbalance 0.2;
 
 
     // Number of buffer layers between different levels.
     // 1 means normal 2:1 refinement restriction, larger means slower
     // refinement.
-    nCellsBetweenLevels 3;
+    nCellsBetweenLevels 2;
 
 
 
@@ -85,14 +85,15 @@ castellatedMeshControls
     // This is a featureEdgeMesh, read from constant/triSurface for now.
     features
     (
+
         {
-            file "fdEdges.vtk";
-            level 0;
-        }
-/*         {
             file "hedgeEdges.vtk";
-            level 7;
-        } */
+            level 8;
+        } 
+        {
+            file "hedgeOtherEdges.vtk";
+            level 6;
+        }
     );
 
 
@@ -112,7 +113,7 @@ castellatedMeshControls
             level (0 0);
             regions
             {
-                hedge {level (4 8); patchInfo{type patch;}}
+                hedge {level (4 5); patchInfo{type patch;}}
             }
         }
 /*         hedge
@@ -213,11 +214,11 @@ castellatedMeshControls
     // Whether any faceZones (as specified in the refinementSurfaces)
     // are only on the boundary of corresponding cellZones or also allow
     // free-standing zone faces. Not used if there are no faceZones.
-    allowFreeStandingZoneFaces true;
+    allowFreeStandingZoneFaces false;
 
 
     // Enable automatic leak closure (default is exit immediately)
-    useLeakClosure true;
+    useLeakClosure false;
 }
 
 // Settings for the snapping.
@@ -225,7 +226,7 @@ snapControls
 {
     //- Number of patch smoothing iterations before finding correspondence
     //  to surface
-    nSmoothPatch 3;
+    nSmoothPatch 5;
 
     //- Relative distance for points to be attracted by surface feature point
     //  or edge. True distance is this factor times local
@@ -243,7 +244,7 @@ snapControls
 
         //- Number of feature edge snapping iterations.
         //  Leave out altogether to disable.
-        nFeatureSnapIter 10;
+        nFeatureSnapIter 15;
 
         //- Detect (geometric only) features by sampling the surface
         //  (default=false).

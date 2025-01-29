@@ -15,7 +15,7 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 castellatedMesh true;
-snap            false;
+snap            true;
 addLayers       false;
 
 // Geometry. Definition of all surfaces. All surfaces are of class
@@ -26,16 +26,9 @@ addLayers       false;
 // - to 'snap' the mesh boundary to the surface
 geometry
 {
-    hedgeFD{
+    hedge{
         type triSurfaceMesh;
-        file "hedgeFD.stl";
-        regions{
-            inlet;
-            outlet;
-            slipwall;
-            symmetry1;
-            symmetry2;
-        }
+        file "HEDGE.obj";
     }
 };
 
@@ -86,14 +79,6 @@ castellatedMeshControls
     features
     (
 
-        {
-            file "hedgeEdges.vtk";
-            level 8;
-        } 
-        {
-            file "hedgeOtherEdges.vtk";
-            level 6;
-        }
     );
 
 
@@ -109,11 +94,10 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        hedgeFD{
-            level (0 0);
-            regions
-            {
-                hedge {level (4 5); patchInfo{type patch;}}
+        hedge{
+            level (5 6);
+            patchInfo{
+                type wall;
             }
         }
 /*         hedge

@@ -19,9 +19,9 @@ backgroundMesh
     backgroundMeshSize 0.05; // max background mesh cell size (in meters)
     xMin    -0.366268;
     xMax     3.66268;
-    yMin    -6.75955e-17;
+    yMin     0;
     yMax     0.988702;
-    zMin    -3.20924e-17;
+    zMin     0;
     zMax     0.988702;
     
     // uncomment to manually define number of cells    
@@ -68,9 +68,9 @@ edges
 boundary
 (
 //  Uncomment below to define patches in background mesh
-/*
-    left
-    {
+
+    inlet1
+    {   // first XZ face
         type patch;
         faces
         (
@@ -78,51 +78,53 @@ boundary
         );
     }
 
-    right
-    {
+    outlet1
+    {   
         type patch;
         faces
         (
-            (1 5 6 2)
+            (1 5 6 2)   // 2nd XZ face
         );
     }
 
-    bottom
-    {
+/*     symmetry2
+    {   
         type patch;
         faces
         (
-            (0 1 2 3)
+            (0 1 2 3)   // 1st XY face
+        );
+    } */
+
+    slip1
+    {   
+        type patch;
+        faces
+        (
+            (4 7 6 5)   // 2nd XY face
+            (3 2 6 7)   // 2nd XZ face
         );
     }
 
-    top
-    {
+    symmetry1
+    {   
         type patch;
         faces
         (
-            (4 7 6 5)
+            (0 4 5 1)   // 1st XZ face
+            (0 1 2 3)   // 1st XY face
         );
     }
 
-    back
-    {
+/*     slip2
+    {   
         type patch;
         faces
         (
-            (0 4 5 1)
+            (3 2 6 7)   // 2nd XZ face
         );
-    }
+    } */
 
-    front
-    {
-        type patch;
-        faces
-        (
-            (3 2 6 7)
-        );
-    }
-*/
 );
 
 mergePatchPairs

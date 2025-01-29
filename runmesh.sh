@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")"
+
+numProc=8
 clear
 echo "Press Enter to clean the old mesh"
 read
@@ -19,10 +21,12 @@ done
 
 echo "Background Meshing - press Enter to continue"
 read # wait for user input
-ideasUnvToFoam cad/backgroundMesh.unv
-renumberMesh # renumber mesh cells to reduce bandwidth
+blockMesh
 
-read -p "snappyHexMesh - enter number of processors: " numProc
+
+# read -p "snappyHexMesh - enter number of processors: " numProc
+echo "snappyHexMesh - press Enter to continue"
+read
 decomposePar
 mpirun -np $numProc snappyHexMesh -parallel
 reconstructParMesh

@@ -14,7 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-combined.stl
+hedgeFD.stl
 {
     extractionMethod     extractFromSurface;
 
@@ -32,7 +32,7 @@ combined.stl
         minLen           0;
     }
 
-    writeObj             yes;
+    writeObj             no;
 }
 
 // ************************************************************************* //

@@ -15,7 +15,7 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 castellatedMesh true;
-snap            false;
+snap            true;
 addLayers       false;
 
 // Geometry. Definition of all surfaces. All surfaces are of class
@@ -26,13 +26,17 @@ addLayers       false;
 // - to 'snap' the mesh boundary to the surface
 geometry
 {
-    inlet1.stl{type triSurfaceMesh; name inlet1;}
-    outlet1.stl{type triSurfaceMesh; name outlet1;}
-    slipwall1.stl{type triSurfaceMesh; name slipwall1;}
-    symmetry1.stl{type triSurfaceMesh; name symmetry1;}
-    symmetry2.stl{type triSurfaceMesh; name symmetry2;}
-    hedge.stl{type triSurfaceMesh; name hedge;}
-    refinebox.stl{type triSurfaceMesh; name refinebox;}
+    hedgeFD{
+        type triSurfaceMesh;
+        file "hedgeFD.stl";
+        regions{
+            inlet;
+            outlet;
+            slipwall;
+            symmetry1;
+            symmetry2;
+        }
+    }
 };
 
 // Settings for the castellatedMesh generation.
@@ -58,7 +62,7 @@ castellatedMeshControls
     // few cells. This setting will cause refinement to stop if <= minimumRefine
     // are selected for refinement. Note: it will at least do one iteration
     // (unless the number of cells to refine is 0)
-    minRefinementCells 10;
+    minRefinementCells 100;
 
     // Allow a certain level of imbalance during refining
     // (since balancing is quite expensive)
@@ -81,9 +85,13 @@ castellatedMeshControls
     // This is a featureEdgeMesh, read from constant/triSurface for now.
     features
     (
+        {
+            file "fdEdges.vtk";
+            level 0;
+        }
 /*         {
-            file "hedge_edges.vtk";
-            level 6;
+            file "hedgeEdges.vtk";
+            level 7;
         } */
     );
 
@@ -100,7 +108,14 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        hedge
+        hedgeFD{
+            level (0 0);
+            regions
+            {
+                hedge {level (4 8); patchInfo{type patch;}}
+            }
+        }
+/*         hedge
         {
             // Surface-wise min and max refinement level
             level (2 4); //(8 8) for fine, (5 5) for coarse testing on laptop
@@ -152,11 +167,11 @@ castellatedMeshControls
             {
                 type patch;
             }
-        }
+        } */
     }
 
     // Resolve sharp angles
-    resolveFeatureAngle 5;
+    resolveFeatureAngle 30;
 
 
     // Region-wise refinement
@@ -253,10 +268,10 @@ addLayersControls
     // Per final patch (so not geometry!) the layer information
     layers
     {
-        hedge
+/*         hedge
         {
             nSurfaceLayers 5;
-        }
+        } */
     }
 
     // Expansion factor for layer mesh

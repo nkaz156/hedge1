@@ -16,9 +16,10 @@ for dir in */; do
     fi
 done
 
-echo "blockMesh - press Enter to continue"
+echo "Background Meshing - press Enter to continue"
 read # wait for user input
-blockMesh
+ideasUnvToFoam cad/backgroundMesh.unv
+renumberMesh # renumber mesh cells to reduce bandwidth
 
 read -p "snappyHexMesh - enter number of processors: " numProc
 decomposePar

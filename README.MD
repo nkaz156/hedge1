@@ -41,17 +41,29 @@ folder containing dictionaries for how the case is meshed and run
 ## Geometry Preparation
 HEDGE modeled in Onshape, fluid domain created using sketch, extrusion, and cut in onshape, refinement box created using sketch and extrusion in Onshape. Fluid domain, refinement box exported as fine STL. From here, follow [Holzmann CFD's geometry preparation steps](https://www.youtube.com/watch?v=BRCqu_Nyhhw) 
 
-Salome (goated French power grid) used to generate a high quality 2d mesh (netgen 2d, wire 1d w/ adaptive hypothesis). Salome lets us import a STEP file and have control over our STL output so it's a faithful representation of our geometry unlike CAD generated STL files. Salome steps:
+### Salome:
+Salome (goated French power grid) used to generate a high quality 2d mesh (netgen 2d (no hypothesis), wire 1d w/ adaptive hypothesis). Salome lets us import a STEP file and have control over our STL output so it's a faithful representation of our geometry unlike CAD generated STL files. Salome steps:
 1. Create face groups of what we want to use as patches for OpenFOAM
 1. Generate a mesh using netgen settings above, play with settings until your smallest curves are covered
 1. Generate mesh groups (right click on surface meshh in tree > create groups from geometry > select previously assigned face groups)
 1. Export stl files to a folder (must be done one by one, could maybe be automated with a python script), add to OpenFOAM case. Combine as shown below.
 
+Salome can also create the background mesh (since blockMesh can be annoying). This also makes it easier to verify you have the right background mesh size. Steps:
+1. While fluid domain selected, go to inspection > dimension > bounding box
+1. W/ BB selected, inspection > center of mass
+1. Scale BB (in this case by 1.05) about center of mass. This ensures we don't miss any patches.
+1. Create mesh with bounding box. 3D: Hexahedron (i, j, k), 2D: Quadrangle mapping, 1D: Wire discretization. Only hypothesis is local length on 1D, set to background element size. Compute mesh, once satisfied, export as .UNV file and add to the case. 
+1. Convert the .UNV to foam with `ideasUnvToFoam <nameOfUnvFile>`
+
+
  n STLs can be combined (from patches folder in this case) using  `cat * > ../hedgeFD.stl` in bash terminal. produces 1 stl with distinct patches by boundary condition.
+
+ 
 
 edge meshing done in paraview with edge filter to identify right angle.  `surfaceFeatureExtract` function in openFOAM used to write eMesh file used for edge refinement using the identified angle.
 
 ## MESHING
+`Ctrl+C` terminates whatever FOAM process is running in the terminal
 ### `blockMesh`
 defines background mesh which goes around fluid domain. Needed for snappyHexMesh. Set slightly larger than fluid domain to avoid losing a patch.
 ### `snappyHexMesh`

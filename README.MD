@@ -1,8 +1,5 @@
 # HEDGE OPENFOAM V1
 Initial simulation of HEDGE and learning about openFOAM. Case based off of `compressibleInflowOutflow` template (from `openfoam main directory/etc/templates`)
->[!WARNING]
->**DELETE ALL POLYMESH FOLDERS BEFORE MAKING COMMITS**
->Oversized files don't play nice with github
 
 >[!TIP]
 >**vscode** makes editing OpenFOAM cases a lot easier. More info at end of document.

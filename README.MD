@@ -10,10 +10,10 @@ Initial simulation of HEDGE and learning about openFOAM. Case based off of `comp
 - [x] create geometry (i used onshape), ask for share
 - [x] set up blockmesh
 - [ ] get snappyHexMesh working for small scale coarse mesh test
-  - [ ] fix errors with edge refinement - missing where it intersects with XY wall symmetry plane
-  - [ ] dial in curve refinement
-  - [ ] fix missing refinement region
-  - [ ] fix 1 or 2 cells in odd places - especially by fins. might be coarse mesh artifacts
+  - [x] fix errors with edge refinement - missing where it intersects with XY wall symmetry plane
+  - [x] dial in curve refinement
+  - [x] fix missing refinement region
+  - [x] fix 1 or 2 cells in odd places - especially by fins. might be coarse mesh artifacts
   - [ ] add boundary layer
 - [x] get snappy to run in parallel
 - [ ] run snappyHexMesh on HPC

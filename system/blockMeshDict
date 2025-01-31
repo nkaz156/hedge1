@@ -16,7 +16,7 @@ FoamFile
 
 backgroundMesh
 {
-    backgroundMeshSize 0.05; // max background mesh cell size (in meters)
+    backgroundMeshSize 0.02; // max background mesh cell size (in meters)
     xMin    -0.366268;
     xMax     3.66268;
     yMin     0;
